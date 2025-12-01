@@ -1,0 +1,117 @@
+@use './utils/' as *;
+
+// DESKTOP PRESET START
+@mixin desktop-text-preset-1() {
+  @include font-style($font-size: 144px, $letter-spacing: 0px);
+  @include bellefair-regular();
+}
+
+@mixin desktop-text-preset-2() {
+  @include font-style($font-size: 96px, $letter-spacing: 0px);
+  @include bellefair-regular();
+}
+
+@mixin desktop-text-preset-3() {
+  @include font-style($font-size: 56px, $letter-spacing: 0px);
+  @include bellefair-regular();
+}
+
+@mixin desktop-text-preset-4() {
+  @include font-style($font-size: 32px, $letter-spacing: 0px);
+  @include bellefair-regular();
+}
+
+@mixin desktop-text-preset-5() {
+  @include font-style($font-size: 28px, $letter-spacing: 4px);
+  @include barlow-condensed-regular();
+}
+
+@mixin desktop-text-preset-6() {
+  @include font-style($font-size: 28px, $letter-spacing: 0px);
+  @include bellefair-regular();
+}
+
+@mixin desktop-text-preset-7() {
+  @include font-style($font-size: 14px, $letter-spacing: 2px);
+  @include barlow-condensed-regular();
+}
+
+@mixin desktop-text-preset-8() {
+  @include font-style($font-size: 16px, $letter-spacing: 2px);
+  @include barlow-condensed-regular();
+}
+
+@mixin desktop-text-preset-8-bold() {
+  @include font-style($font-size: 16px, $letter-spacing: 2.7px);
+  @include barlow-condensed-bold();
+}
+
+@mixin desktop-text-preset-9() {
+  @include font-style($font-size: 18px, $letter-spacing: 0px, $line-height: 1.8);
+  @include barlow-regular();
+}
+// DESKTOP PRESET END
+
+// TABLET PRESET START
+@mixin tablet-text-preset-2() {
+  @include font-style($font-size: 80px, $letter-spacing: 0px);
+  @include bellefair-regular();
+}
+
+@mixin tablet-text-preset-3() {
+  @include font-style($font-size: 40px, $letter-spacing: 0px);
+  @include bellefair-regular();
+}
+
+@mixin tablet-text-preset-4() {
+  @include font-style($font-size: 24px, $letter-spacing: 0px);
+  @include bellefair-regular();
+}
+
+@mixin tablet-text-preset-5() {
+  @include font-style($font-size: 20px, $letter-spacing: 0.15em);
+  @include barlow-condensed-regular();
+}
+
+@mixin tablet-text-preset-9() {
+  @include font-style($font-size: 16px, $letter-spacing: 0px, $line-height: 1.8);
+  @include barlow-regular();
+}
+// TABLET PRESET END
+
+// MOBILE PRESET START
+@mixin mobile-text-preset-1() {
+  @include font-style($font-size: 80px, $letter-spacing: 0px);
+  @include bellefair-regular();
+}
+
+@mixin mobile-text-preset-2() {
+  @include font-style($font-size: 56px, $letter-spacing: 0px);
+  @include bellefair-regular();
+}
+
+@mixin mobile-text-preset-3() {
+  @include font-style($font-size: 24px, $letter-spacing: 0px);
+  @include bellefair-regular();
+}
+
+@mixin mobile-text-preset-4() {
+  @include font-style($font-size: 18px, $letter-spacing: 0px);
+  @include bellefair-regular();
+}
+
+@mixin mobile-text-preset-6() {
+  @include font-style($font-size: 16px, $letter-spacing: 0.15em);
+  @include barlow-condensed-regular();
+}
+
+@mixin mobile-text-preset-8() {
+  @include font-style($font-size: 14px, $letter-spacing: 0.15em);
+  @include barlow-condensed-regular();
+}
+
+@mixin mobile-text-preset-9() {
+  @include font-style($font-size: 15px, $letter-spacing: 0px, $line-height: 1.8);
+  @include barlow-regular();
+}
+// MOBILE PRESET END

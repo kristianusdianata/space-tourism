@@ -1,0 +1,33 @@
+@mixin bellefair($font-weight: 400) {
+  font-family: 'Bellefair', serif;
+  font-style: normal;
+  font-weight: $font-weight;
+}
+
+@mixin barlow-condensed($font-weight: 400) {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-style: normal;
+  font-weight: $font-weight;
+}
+
+@mixin barlow($font-weight: 400) {
+  font-family: 'Barlow', sans-serif;
+  font-style: normal;
+  font-weight: $font-weight;
+}
+
+@mixin bellefair-regular {
+  @include bellefair();
+}
+
+@mixin barlow-condensed-regular {
+  @include barlow-condensed();
+}
+
+@mixin barlow-condensed-bold {
+  @include barlow-condensed($font-weight: 700);
+}
+
+@mixin barlow-regular {
+  @include barlow();
+}

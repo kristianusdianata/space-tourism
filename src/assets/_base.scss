@@ -1,0 +1,62 @@
+@use 'sass:map';
+@use './utils/index' as *;
+
+:root {
+  --blue-300: hsl(231, 77%, 90%);
+  --blue-900: hsl(230, 35%, 7%);
+  --blue-900-5: hsl(230, 35%, 7%, 0.5);
+  --white: hsl(0, 0%, 100%);
+  --white-5: hsl(0, 0%, 100%, 0.05);
+  --white-10: hsl(0, 0%, 100%, 0.1);
+  --white-17: hsl(0, 0%, 100%, 0.17);
+  --white-25: hsl(0, 0%, 100%, 0.25);
+  --white-50: hsl(0, 0%, 100%, 0.5);
+
+  --spacing-25: 2px;
+  --spacing-50: 4px;
+  --spacing-100: 8px;
+  --spacing-150: 12px;
+  --spacing-200: 16px;
+  --spacing-300: 24px;
+  --spacing-400: 32px;
+  --spacing-500: 40px;
+  --spacing-600: 48px;
+  --spacing-800: 64px;
+  --spacing-1000: 80px;
+  --spacing-1200: 96px;
+  --spacing-1600: 128px;
+}
+
+body {
+  min-height: 100vh;
+}
+
+img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+}
+
+abbr {
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  outline: none;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0px;
+}
+
+hr {
+  margin: 0px;
+  padding: 0px;
+  border: none;
+}
