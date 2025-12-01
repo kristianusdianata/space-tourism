@@ -36,7 +36,11 @@ onBeforeUnmount(() => {
 <template>
   <nav class="nav">
     <div class="nav__logo">
-      <RouterLink :to="{ name: store.menus[0]?.page }" class="nav__logo-icon">
+      <RouterLink
+        :to="{ name: store.menus[0]?.page }"
+        class="nav__logo-icon"
+        aria-label="Website logo"
+      >
         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 48 48">
           <g fill="none" fill-rule="evenodd">
             <circle cx="24" cy="24" r="24" fill="#FFF" />
