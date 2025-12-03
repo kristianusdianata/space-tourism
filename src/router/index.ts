@@ -1,6 +1,7 @@
-import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
-import { HomeView } from '@views'
 import { navbarMenu } from '@config'
+import { useLoading } from '@store'
+import { HomeView } from '@views'
+import { createRouter, createWebHashHistory, type RouteRecordRaw } from 'vue-router'
 
 const routes: RouteRecordRaw[] = []
 
@@ -9,26 +10,36 @@ function capitalize(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
+async function pageLoader(menu: string) {
+  const store = useLoading()
+  store.reset()
+  store.startLoading()
+
+  try {
+    const module = await import('@views')
+    return module[`${capitalize(menu)}View` as keyof typeof module]
+  } catch {
+    store.stopLoading()
+    store.error()
+    store.failed()
+  } finally {
+    store.stopLoading()
+    store.clearError()
+    store.success()
+  }
+}
+
 for (const menu of navbarMenu) {
-  const path = menu === 'home' ? '/' : `/${menu}`
-  const name = menu
-
-  const module = await import('@views')
-  const component =
-    menu === 'home' ? HomeView : module[`${capitalize(menu)}View` as keyof typeof module]
-
-  const meta = { bodyClass: `bg-${menu}` }
-
   routes.push({
-    path: path,
-    name: name,
-    component,
-    meta,
+    path: menu === 'home' ? '/' : `/${menu}`,
+    name: menu,
+    component: menu === 'home' ? HomeView : () => pageLoader(menu),
+    meta: { bodyClass: `bg-${menu}` },
   })
 }
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes,
 })
 

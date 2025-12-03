@@ -1,9 +1,11 @@
 <script lang="ts" setup>
-import { useNavbar } from '@store'
+import { useNavbar, useLoading } from '@store'
 import { navbarMenu } from '@config'
 import TabComponent from './TabComponent.vue'
+import { LoadingComponent } from '@components/common'
 
 const store = useNavbar()
+const loadingStore = useLoading()
 
 const pageIndex = store.menus.findIndex((menu) => menu.page === navbarMenu[2])
 store.updateActiveNavbar(pageIndex)
@@ -11,7 +13,11 @@ store.updateActiveNavbar(pageIndex)
 
 <template>
   <main class="container">
-    <article class="crew">
+    <LoadingComponent />
+    <article
+      class="crew"
+      v-if="!loadingStore.isLoading && !loadingStore.isError && loadingStore.isSuccess"
+    >
       <h1 class="crew__title">
         <span>02</span>
         <span>Meet your crew</span>
