@@ -7,11 +7,11 @@ import {
   TabImage,
 } from "@/components/destinations";
 import { MainContainer } from "@/components/ui";
-import { useData, useTransition } from "@/composables";
+import { useData, useTransition, useCanonicalUrl } from "@/composables";
 import { onMounted } from "vue";
 import { capitalize } from "@/utils";
 
-const config = useRuntimeConfig();
+const { canonicalUrl } = useCanonicalUrl();
 const { destinations, getDestinationBySlug } = useData();
 const route = useRoute();
 const { istransitioning, startTransition, stopTransition } = useTransition();
@@ -51,7 +51,7 @@ useHead({
   link: [
     {
       rel: "canonical",
-      href: `${config.public.siteUrl}destinations`,
+      href: `${canonicalUrl.value}`,
     },
   ],
   meta: [

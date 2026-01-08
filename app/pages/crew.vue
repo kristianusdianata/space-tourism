@@ -7,11 +7,11 @@ import {
   TabImage,
 } from "@/components/crew";
 import { MainContainer } from "@/components/ui";
-import { useData, useTransition } from "@/composables";
+import { useData, useTransition, useCanonicalUrl } from "@/composables";
 import { onMounted } from "vue";
 import { capitalize } from "@/utils";
 
-const config = useRuntimeConfig();
+const { canonicalUrl } = useCanonicalUrl();
 const { crew, getCrewBySlug } = useData();
 const route = useRoute();
 const { istransitioning, startTransition, stopTransition } = useTransition();
@@ -51,7 +51,7 @@ useHead({
   link: [
     {
       rel: "canonical",
-      href: `${config.public.siteUrl}crew`,
+      href: `${canonicalUrl.value}`,
     },
   ],
   meta: [

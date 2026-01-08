@@ -1,10 +1,24 @@
 <script lang="ts" setup>
-import { useData } from "@/composables";
+import { useData, useCanonicalUrl } from "@/composables";
 import { MainStructure, ExploreButton } from "@/components/home";
 import { HomeContainer } from "@/components/ui";
 
+const { canonicalUrl } = useCanonicalUrl();
+
 useHead({
   title: "Home",
+  link: [
+    {
+      rel: "canonical",
+      href: `${canonicalUrl.value}`,
+    },
+  ],
+  meta: [
+    {
+      name: "description",
+      content: "Let's travel to the space",
+    },
+  ],
 });
 
 const { menus } = useData();
