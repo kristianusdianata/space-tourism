@@ -53,24 +53,6 @@ useHead({
       rel: "canonical",
       href: `${canonicalUrl.value}`,
     },
-    {
-      rel: "preload",
-      as: "image",
-      href: "/destinations/background-destination-mobile.jpg",
-      media: "(max-width: 767px)",
-    },
-    {
-      rel: "preload",
-      as: "image",
-      href: "/destinations/background-destination-tablet.jpg",
-      media: "(min-width: 768px)",
-    },
-    {
-      rel: "preload",
-      as: "image",
-      href: "/destinations/background-destination-desktop.jpg",
-      media: "(min-width: 1280px)",
-    },
   ],
   meta: [
     {

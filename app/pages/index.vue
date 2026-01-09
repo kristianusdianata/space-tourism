@@ -12,24 +12,6 @@ useHead({
       rel: "canonical",
       href: `${canonicalUrl.value}`,
     },
-    {
-      rel: "preload",
-      as: "image",
-      href: "/home/background-home-mobile.jpg",
-      media: "(max-width: 767px)",
-    },
-    {
-      rel: "preload",
-      as: "image",
-      href: "/home/background-home-tablet.jpg",
-      media: "(min-width: 768px)",
-    },
-    {
-      rel: "preload",
-      as: "image",
-      href: "/home/background-home-desktop.jpg",
-      media: "(min-width: 1280px)",
-    },
   ],
   meta: [
     {

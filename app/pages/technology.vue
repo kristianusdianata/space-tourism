@@ -53,24 +53,6 @@ useHead({
       rel: "canonical",
       href: `${canonicalUrl.value}`,
     },
-    {
-      rel: "preload",
-      as: "image",
-      href: "/technology/background-technology-mobile.jpg",
-      media: "(max-width: 767px)",
-    },
-    {
-      rel: "preload",
-      as: "image",
-      href: "/technology/background-technology-tablet.jpg",
-      media: "(min-width: 768px)",
-    },
-    {
-      rel: "preload",
-      as: "image",
-      href: "/technology/background-technology-desktop.jpg",
-      media: "(min-width: 1280px)",
-    },
   ],
   meta: [
     {
