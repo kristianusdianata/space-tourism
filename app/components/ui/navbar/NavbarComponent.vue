@@ -72,7 +72,7 @@ onBeforeUnmount(() => {
                 :key="menu.label"
                 :index-item="index"
                 :label-item="menu.label"
-                :link-pathname="menu.pathname"
+                :link-pathname="menu.routeName"
               />
             </template>
           </MenuStructure>

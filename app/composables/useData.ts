@@ -1,4 +1,10 @@
-import { slugify } from "@/utils";
+function slugify(value: string): string {
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-") // spaces → dash
+    .replace(/[^\w-]+/g, ""); // remove special chars
+}
 
 export function useData() {
   const listData = {
@@ -118,44 +124,61 @@ export function useData() {
   };
 
   const dataKeys = Object.keys(listData);
+
+  function getDataBySlug<T extends { slug: string }>(
+    items: T[],
+    targetSlug: string
+  ) {
+    return items.find(
+      (item) => item.slug.toLowerCase() === targetSlug.toLowerCase()
+    );
+  }
+
+  function generateUrlByData<T extends { slug: string }>(
+    items: T[],
+    basePath: string
+  ) {
+    const basePathUrl = `/${basePath}`;
+    const childPathUrl = items.map(
+      (item) => `${basePathUrl}/${slugify(item.slug)}`
+    );
+    return [basePathUrl, ...childPathUrl];
+  }
+
+  function getDataByKey<T extends keyof typeof listData>(
+    key: T
+  ): ((typeof listData)[T][number] & { slug: string })[] {
+    const data = listData[key];
+    return data.map((item) => {
+      return { slug: slugify(item.name), ...item };
+    });
+  }
+
   const menus = ["home", ...dataKeys].map((key) => ({
     label: key,
-    pathname: key === "home" ? "index" : key,
-    pathUrl: key === "home" ? "/" : `/${key}/`,
+    routeName: key === "home" ? "index" : key,
+    routes:
+      key === "home"
+        ? "/"
+        : generateUrlByData(getDataByKey(key as keyof typeof listData), key),
   }));
 
-  const destinations = listData.destinations.map((data) => {
-    return { slug: slugify(data.name), ...data };
-  });
+  const destinations = getDataByKey("destinations");
 
   function getDestinationBySlug(slug: string) {
-    return destinations.find(
-      (data) => data.slug.toLowerCase() === slug.toLowerCase()
-    );
+    return getDataBySlug(destinations, slug);
   }
 
-  const crew = listData.crew.map((data) => {
-    return {
-      slug: slugify(data.name),
-      ...data,
-    };
-  });
+  const crew = getDataByKey("crew");
 
   function getCrewBySlug(slug: string) {
-    return crew.find((data) => data.slug.toLowerCase() === slug.toLowerCase());
+    return getDataBySlug(crew, slug);
   }
 
-  const technologies = listData.technology.map((data) => {
-    return {
-      slug: slugify(data.name),
-      ...data,
-    };
-  });
+  const technologies = getDataByKey("technology");
 
   function getTechnologyBySlug(slug: string) {
-    return technologies.find(
-      (data) => data.slug.toLowerCase() === slug.toLowerCase()
-    );
+    return getDataBySlug(technologies, slug);
   }
 
   return {

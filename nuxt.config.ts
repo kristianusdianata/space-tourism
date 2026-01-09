@@ -1,3 +1,7 @@
+import { useData } from "./app/composables";
+
+const { menus } = useData();
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   app: {
@@ -12,9 +16,9 @@ export default defineNuxtConfig({
       mode: "out-in",
     },
   },
-  nitro: {
-    preset: "vercel",
-  },
+  // nitro: {
+  //   preset: "vercel",
+  // },
   css: ["@/assets/main.scss"],
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
@@ -47,13 +51,9 @@ export default defineNuxtConfig({
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL,
     },
   },
-  routeRules: {
-    "/": { prerender: true },
-    "/crew": { prerender: true },
-    "/crew/**": { swr: 60 * 60 * 24 * 365 },
-    "/destinations": { prerender: true },
-    "/destinations/**": { swr: 60 * 60 * 24 * 365 },
-    "/technology": { prerender: true },
-    "/technology/**": { swr: 60 * 60 * 24 * 365 },
-  },
+  routeRules: Object.fromEntries(
+    menus
+      .flatMap((menu) => menu.routes)
+      .map((path) => [path, { prerender: true }])
+  ),
 });
