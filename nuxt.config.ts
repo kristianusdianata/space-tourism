@@ -16,9 +16,9 @@ export default defineNuxtConfig({
       mode: "out-in",
     },
   },
-  // nitro: {
-  //   preset: "vercel",
-  // },
+  nitro: {
+    preset: "vercel",
+  },
   css: ["@/assets/main.scss"],
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
