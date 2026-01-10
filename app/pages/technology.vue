@@ -7,7 +7,12 @@ import {
   TabImage,
 } from "@/components/technology";
 import { MainContainer } from "@/components/ui";
-import { useData, useTransition, useCanonicalUrl } from "@/composables";
+import {
+  useData,
+  useTransition,
+  useCanonicalUrl,
+  useBreakpoint,
+} from "@/composables";
 import { onMounted } from "vue";
 import { capitalize } from "@/utils";
 
@@ -16,6 +21,7 @@ const { technologies, getTechnologyBySlug } = useData();
 const route = useRoute();
 const { istransitioning, startTransition, stopTransition } = useTransition();
 const isMounted = ref<boolean>(false);
+const { isExtraLargeAndUp } = useBreakpoint();
 
 const hasParam = computed(() => {
   return typeof route.params.slug === "string"
@@ -28,6 +34,11 @@ const activeTabRoute = computed(() => {
 });
 
 const data = computed(() => getTechnologyBySlug(activeTabRoute.value));
+const imageSrc = computed(() =>
+  isExtraLargeAndUp.value && isMounted
+    ? data.value?.images.portrait
+    : data.value?.images.landscape
+);
 
 watch(
   () => route.params.slug,
@@ -79,18 +90,25 @@ useHead({
       <template #body>
         <BodyStructure>
           <template #image>
-            <Transition
-              name="slide"
-              @after-leave="stopTransition"
-              mode="out-in"
+            <NuxtImg
+              :custom="true"
+              :src="imageSrc"
+              :placeholder="true"
+              v-slot="{ src, imgAttrs }"
             >
-              <TabImage
-                v-show="!istransitioning && isMounted"
-                :portrait-src="data?.images.portrait"
-                :landscape-src="data?.images.landscape"
-                :alt="data?.name"
-              />
-            </Transition>
+              <Transition
+                name="slide"
+                @after-leave="stopTransition"
+                mode="out-in"
+              >
+                <TabImage
+                  v-if="!istransitioning"
+                  :src="src"
+                  :alt="data?.name"
+                  v-bind="imgAttrs"
+                />
+              </Transition>
+            </NuxtImg>
           </template>
 
           <template #tab-menu>
@@ -115,7 +133,7 @@ useHead({
                   @after-leave="stopTransition"
                   mode="out-in"
                 >
-                  <h2 class="name" v-show="!istransitioning && isMounted">
+                  <h2 class="name" v-if="!istransitioning">
                     {{ data?.name }}
                   </h2>
                 </Transition>
@@ -131,7 +149,7 @@ useHead({
                   @after-leave="stopTransition"
                   mode="out-in"
                 >
-                  <p class="desc" v-show="!istransitioning && isMounted">
+                  <p class="desc" v-if="!istransitioning">
                     {{ data?.description }}
                   </p>
                 </Transition>

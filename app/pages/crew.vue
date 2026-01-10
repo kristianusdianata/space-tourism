@@ -8,14 +8,12 @@ import {
 } from "@/components/crew";
 import { MainContainer } from "@/components/ui";
 import { useData, useTransition, useCanonicalUrl } from "@/composables";
-import { onMounted } from "vue";
 import { capitalize } from "@/utils";
 
 const { canonicalUrl } = useCanonicalUrl();
 const { crew, getCrewBySlug } = useData();
 const route = useRoute();
 const { istransitioning, startTransition, stopTransition } = useTransition();
-const isMounted = ref<boolean>(false);
 
 const hasParam = computed(() => {
   return typeof route.params.slug === "string"
@@ -41,10 +39,6 @@ watch(
     startTransition();
   }
 );
-
-onMounted(() => {
-  isMounted.value = true;
-});
 
 useHead({
   title: computed(() => `Crew – ${capitalize(data.value!.name)}`),
@@ -86,7 +80,6 @@ useHead({
               :custom="true"
               :src="data?.images.webp"
               :placeholder="true"
-              loading="eager"
               v-slot="{ src, imgAttrs }"
             >
               <Transition
@@ -95,7 +88,7 @@ useHead({
                 mode="out-in"
               >
                 <TabImage
-                  v-show="!istransitioning && isMounted"
+                  v-if="!istransitioning"
                   :src="src"
                   :alt="data?.name"
                   v-bind="imgAttrs"
@@ -125,7 +118,7 @@ useHead({
                   @after-leave="stopTransition"
                   mode="out-in"
                 >
-                  <h2 class="name" v-show="!istransitioning && isMounted">
+                  <h2 class="name" v-if="!istransitioning">
                     {{ data?.name }}
                   </h2>
                 </Transition>
@@ -137,7 +130,7 @@ useHead({
                   @after-leave="stopTransition"
                   mode="out-in"
                 >
-                  <p class="role" v-show="!istransitioning && isMounted">
+                  <p class="role" v-if="!istransitioning">
                     {{ data?.role }}
                   </p>
                 </Transition>
@@ -149,7 +142,7 @@ useHead({
                   @after-leave="stopTransition"
                   mode="out-in"
                 >
-                  <p class="bio" v-show="!istransitioning && isMounted">
+                  <p class="bio" v-if="!istransitioning">
                     {{ data?.bio }}
                   </p>
                 </Transition>

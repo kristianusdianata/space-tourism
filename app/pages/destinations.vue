@@ -1,21 +1,19 @@
 <script setup lang="ts">
 import {
-  MainStructure,
   BodyStructure,
+  MainStructure,
   TabBodyStructure,
-  TabLink,
   TabImage,
+  TabLink,
 } from "@/components/destinations";
 import { MainContainer } from "@/components/ui";
-import { useData, useTransition, useCanonicalUrl } from "@/composables";
-import { onMounted } from "vue";
+import { useCanonicalUrl, useData, useTransition } from "@/composables";
 import { capitalize } from "@/utils";
 
 const { canonicalUrl } = useCanonicalUrl();
 const { destinations, getDestinationBySlug } = useData();
 const route = useRoute();
 const { istransitioning, startTransition, stopTransition } = useTransition();
-const isMounted = ref<boolean>(false);
 
 const hasParam = computed(() => {
   return typeof route.params.slug === "string"
@@ -41,10 +39,6 @@ watch(
     startTransition();
   }
 );
-
-onMounted(() => {
-  isMounted.value = true;
-});
 
 useHead({
   title: computed(() => `Destination – ${capitalize(data.value!.name)}`),
@@ -83,7 +77,6 @@ useHead({
               :custom="true"
               :src="data?.images.webp"
               :placeholder="true"
-              loading="eager"
               v-slot="{ src, imgAttrs }"
             >
               <Transition
@@ -92,7 +85,7 @@ useHead({
                 mode="out-in"
               >
                 <TabImage
-                  v-show="!istransitioning && isMounted"
+                  v-if="!istransitioning"
                   :src="src"
                   :alt="data?.name"
                   v-bind="imgAttrs"
@@ -123,10 +116,7 @@ useHead({
                   @after-leave="stopTransition"
                   mode="out-in"
                 >
-                  <h2
-                    class="sub-heading"
-                    v-show="!istransitioning && isMounted"
-                  >
+                  <h2 class="sub-heading" v-if="!istransitioning">
                     {{ data?.name.toUpperCase() }}
                   </h2>
                 </Transition>
@@ -138,7 +128,7 @@ useHead({
                   @after-leave="stopTransition"
                   mode="out-in"
                 >
-                  <p class="sub-desc" v-show="!istransitioning && isMounted">
+                  <p class="sub-desc" v-if="!istransitioning">
                     {{ data?.description }}
                   </p>
                 </Transition>
@@ -151,10 +141,7 @@ useHead({
                   @after-leave="stopTransition"
                   mode="out-in"
                 >
-                  <span
-                    class="distance-desc"
-                    v-show="!istransitioning && isMounted"
-                  >
+                  <span class="distance-desc" v-if="!istransitioning">
                     {{ data?.distance }}
                   </span>
                 </Transition>
@@ -167,10 +154,7 @@ useHead({
                   @after-leave="stopTransition"
                   mode="out-in"
                 >
-                  <span
-                    class="time-desc"
-                    v-show="!istransitioning && isMounted"
-                  >
+                  <span class="time-desc" v-if="!istransitioning">
                     {{ data?.travel }}
                   </span>
                 </Transition>

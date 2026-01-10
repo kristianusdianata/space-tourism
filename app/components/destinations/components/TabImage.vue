@@ -6,7 +6,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <img :src="props.src" :alt="props.alt" class="tab-image" />
+  <img :src="props.src" :alt="props.alt" loading="eager" class="tab-image" />
 </template>
 
 <style lang="scss" scoped>

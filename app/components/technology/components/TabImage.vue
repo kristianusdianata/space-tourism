@@ -1,21 +1,12 @@
 <script lang="ts" setup>
 const props = defineProps<{
-  portraitSrc?: string;
-  landscapeSrc?: string;
+  src?: string;
   alt?: string;
 }>();
 </script>
 
 <template>
-  <picture class="tab-image">
-    <source media="(min-width:1280px)" :srcset="props.portraitSrc" />
-    <NuxtImg
-      :src="props.landscapeSrc"
-      :alt="props.alt"
-      :placeholder="true"
-      loading="eager"
-    />
-  </picture>
+  <img :src="props.src" :alt="props.alt" loading="eager" class="tab-image" />
 </template>
 
 <style lang="scss" scoped>
@@ -24,5 +15,6 @@ const props = defineProps<{
 .tab-image {
   display: block;
   @include layout-size($height: 100%, $width: 100%);
+  aspect-ratio: 21/9;
 }
 </style>
