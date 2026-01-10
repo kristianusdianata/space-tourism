@@ -7,10 +7,14 @@ const props = defineProps<{
 </script>
 
 <template>
-  <!-- <img :src="props.src" :alt="props.alt" class="tab-image" /> -->
   <picture class="tab-image">
     <source media="(min-width:1280px)" :srcset="props.portraitSrc" />
-    <NuxtImg :src="props.landscapeSrc" :alt="props.alt" :placeholder="true" />
+    <NuxtImg
+      :src="props.landscapeSrc"
+      :alt="props.alt"
+      :placeholder="true"
+      loading="eager"
+    />
   </picture>
 </template>
 

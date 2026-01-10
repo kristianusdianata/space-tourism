@@ -83,6 +83,7 @@ useHead({
               :custom="true"
               :src="data?.images.webp"
               :placeholder="true"
+              loading="eager"
               v-slot="{ src, imgAttrs }"
             >
               <Transition
