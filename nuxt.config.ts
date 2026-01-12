@@ -43,14 +43,8 @@ export default defineNuxtConfig({
         preload: true,
       },
     ],
-    "@pinia/nuxt",
     "@nuxt/image",
   ],
-  runtimeConfig: {
-    public: {
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL,
-    },
-  },
   routeRules: Object.fromEntries(
     menus
       .flatMap((menu) => menu.routes)
