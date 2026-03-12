@@ -2,7 +2,7 @@
 
 ![Space Tourism Website](./public/website-design.jpeg)
 
-A modern responsive website built with **Nuxt**, **Vue**, and **SCSS**, inspired by the Space Tourism challenge.
+A modern responsive website built with **Nuxt**, **Vue**, and **SCSS**, based on the Space Tourism challenge from [Frontend Mentor](https://www.frontendmentor.io/solutions/responsive-space-tourism---static-site-generation-ssg-with-nuxt-jJ1E4uyI25).
 
 This project focuses not only on building the UI but also exploring **SEO-friendly rendering strategies** for tab-based interfaces using **Static Site Generation (SSG)**.
 
