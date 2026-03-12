@@ -1,4 +1,4 @@
-# Space Tourism Website
+# SEO-Friendly Tab Navigation with Static Site Generation
 
 ![Space Tourism Website](./public/website-design.jpeg)
 
